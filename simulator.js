@@ -85,6 +85,11 @@ function Simulator() {
   }
 
   this.simulate = function() {
+    if (Date.now() - this.lastRender >= 1000 / this.FPS) {
+      this.draw();
+      this.printData();
+      this.lastRender = Date.now();
+    }
     if (!this.running) {
       this.lastUpdate = Date.now();
       return;
@@ -95,11 +100,6 @@ function Simulator() {
       this.lastUpdate += 1000 / this.UPS;
       cnt++;
       if (cnt >= this.UPS) break;
-    }
-    if (Date.now() - this.lastRender >= 1000 / this.FPS) {
-      this.draw();
-      this.printData();
-      this.lastRender = Date.now();
     }
   }
 
