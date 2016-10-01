@@ -1,0 +1,17 @@
+.simulator {
+  float: left;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+
+.data {
+  float: right;
+  width: 29%;
+}
+
+.verticalDivider {
+  border-left: 1px gray solid;
+  height: 100%;
+  position: absolute;
+  margin-left: 0.5%;
+}
