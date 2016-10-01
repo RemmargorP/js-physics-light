@@ -1,8 +1,8 @@
 function getRandomColor() {
-  var letters = '0123456789AB';
+  var letters = '0123456789';
   var color = '#';
   for (var i = 0; i < 6; i++ ) {
-    color += letters[Math.floor(Math.random() * 12)];
+    color += letters[Math.floor(Math.random() * 10)];
   }
   return color;
 }
@@ -61,8 +61,8 @@ function Particle(position = new Vector(0, 0, 0), velocity = new Vector(0, 0, 0)
   this.y0 = []
 
   this.collide = function(timeElapsed) {
-    if (this.position.y <= 0) {
-      this.velocity.y *= -1;
+    if (this.position.y < 0) {
+      this.velocity.y = Math.abs(this.velocity.y);
       this.y0.push(timeElapsed.toFixed(3));
     }
   };
