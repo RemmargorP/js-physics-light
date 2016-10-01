@@ -41,7 +41,7 @@ model.init = function() {
 
   r0 = new Vector(0, 100, 0);
 
-  model.particles = [new Particle(r0, new Vector(), model.constants.g)]
+  model.particles = [new Particle(r0, new Vector(3, 0, 0), model.constants.g)]
 };
 
 model.update = function(delta_t) {
