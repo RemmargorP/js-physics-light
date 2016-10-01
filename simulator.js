@@ -3,16 +3,16 @@ function Model() {
     g: new Vector(0, -10, 0)
   };
 
-  r0 = new Vector(0, 10, 0);
-  v0 = new Vector(15, 60, 0);
+  r0 = new Vector(0, 15, 0);
+  v0 = new Vector(0, 20, 0);
 
-  this.particles = [new Particle(r0, v0, this.constants.g), new Particle(r0, new Vector(15, -20), this.constants.g.mul(0.5))]
-  this.update = function(delta_t) {
+  this.particles = [new Particle(r0, v0, this.constants.g), new Particle(r0, new Vector(10, 20), this.constants.g)]
+  this.update = function(delta_t, timeElapsed) {
     this.particles.forEach(function(item, index, arr) {
       item.update(delta_t);
     });
     this.particles.forEach(function(item, index, arr) {
-      item.collide();
+      item.collide(timeElapsed);
     });
   }
 };
@@ -56,8 +56,8 @@ function Simulator() {
   }
 
   this.update = function() {
-    this.model.update(this.deltaT);
     this.timeElapsed += this.deltaT;
+    this.model.update(this.deltaT, this.timeElapsed);
   }
 
   this.printData = function() {
@@ -77,9 +77,10 @@ function Simulator() {
       }
       var elem = list.childNodes[index];
       elem.innerHTML = '<div class="box" style="background-color: ' + item.appearance.color + ';"></div>' +
-                        '<div> position: (' + item.position.x.toFixed(3) + '; ' + item.position.y.toFixed(5) + ')<br>'+
-                        'velocity: (' + item.velocity.x.toFixed(3) + '; ' + item.velocity.y.toFixed(5) + ')<br>' +
-                        'acceleration: (' + item.acceleration.x.toFixed(3) + '; ' + item.acceleration.y.toFixed(5) + ')<br></div>';
+                        '<div> position: (' + item.position.x.toFixed(3) + '; ' + item.position.y.toFixed(3) + ')<br>'+
+                        'velocity: (' + item.velocity.x.toFixed(3) + '; ' + item.velocity.y.toFixed(3) + ')<br>' +
+                        'acceleration: (' + item.acceleration.x.toFixed(3) + '; ' + item.acceleration.y.toFixed(3) + ')<br>' +
+                        'y=0 moments: [' + item.y0 + ']</div>';
     });
   }
 

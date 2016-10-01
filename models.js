@@ -58,10 +58,12 @@ function Particle(position = new Vector(0, 0, 0), velocity = new Vector(0, 0, 0)
   this.appearance = {
     color: getRandomColor()
   };
+  this.y0 = []
 
-  this.collide = function() {
+  this.collide = function(timeElapsed) {
     if (this.position.y <= 0) {
       this.velocity.y *= -1;
+      this.y0.push(timeElapsed.toFixed(3));
     }
   };
 
