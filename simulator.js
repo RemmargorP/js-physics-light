@@ -3,23 +3,7 @@ function Model() {
     g: new Vector(0, -10, 0)
   };
 
-  var r0 = new Vector(0, 15, 0);
-  var v0 = new Vector(0, 20, 0);
-  var a0 = this.constants.g;
-
-  var r1 = new Vector(0, 15, 0);
-  var v1 = new Vector(10, 20, 0);
-  var a1 = this.constants.g;
-
-  var r2 = new Vector();
-  var v2 = new Vector(30, 5);
-  var a2 = new Vector(-4, -2);
-
-  this.particles = [
-    new Particle(r0, v0, a0),
-    new Particle(r1, v1, a1),
-    new Particle(r2, v2, a2)
-  ];
+  this.particles = [];
   this.update = function(delta_t, timeElapsed) {
     this.particles.forEach(function(item, index, arr) {
       item.update(delta_t);
@@ -115,6 +99,13 @@ function Simulator() {
       if (cnt >= this.UPS) break;
     }
   }
+
+  this.addParticle = function() {
+    var rx = parseFloat(document.getElementById('rx').value), ry = parseFloat(document.getElementById('ry').value);
+    var vx = parseFloat(document.getElementById('vx').value), vy = parseFloat(document.getElementById('vy').value);
+    var ax = parseFloat(document.getElementById('ax').value), ay = parseFloat(document.getElementById('ay').value);
+    this.model.particles.push(new Particle(new Vector(rx, ry), new Vector(vx, vy), new Vector(ax, ay)))
+  };
 
   this.start = function() {
     this.running = true;

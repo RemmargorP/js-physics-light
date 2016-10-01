@@ -21,6 +21,13 @@
     <div class="isPaused">
       <input type="button" value="Simulate" onclick="simulator.start();">
     </div>
+    <div>
+      Add a new particle: <br>
+      r<sub>0</sub>: x=<input type="text" value="0.0" size="5" id="rx"> y=<input type="text" value="0.0" size="5" id="ry"><br>
+      v<sub>0</sub>: x=<input type="text" value="0.0" size="5" id="vx"> y=<input type="text" value="0.0" size="5" id="vy"><br>
+      a<sub>0</sub>: x=<input type="text" value="0.0" size="5" id="ax"> y=<input type="text" value="-10.0" size="5" id="ay"><br>
+      <input type="button" value="Add" onclick="simulator.addParticle();">
+    </div>
   </span>
 
   <script type="text/javascript">
