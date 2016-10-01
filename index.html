@@ -5,21 +5,27 @@
   <title>Physics Simulator</title>
   <link href="style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="models.js"></script>
+  <script type="text/javascript" src="graphics.js"></script>
   <script type="text/javascript" src="simulator.js"></script>
 </head>
 <body>
   <span class="simulator">
-    <canvas id="canvas" height="500px", width="800px">
+    <canvas id="simulation" height="500px", width="800px">
     </canvas>
   </span>
   <span class="verticalDivider"></span>
   <span class="data">
-    bek
+    <div>
+      <h3><b>Data</b></h3>
+    </div>
+    <div class="isPaused">
+      <input type="button" value="Simulate" onclick="simulator.start();">
+    </div>
   </span>
 
-  <script>
-    simulator.init();
-    start();
+  <script type="text/javascript">
+    var simulator = new Simulator();
+    setInterval(function() {  simulator.simulate() }, 1);
   </script>
 </body>
 </html>

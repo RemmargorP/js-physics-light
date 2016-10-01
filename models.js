@@ -10,6 +10,9 @@ function Vector(x=0, y=0, z=0) {
   this.mul = function(d) {
     return new Vector(this.x * d, this.y * d, this.z * d);
   };
+  this.mulV = function(v) {
+    return new Vector(this.x * v.x, this.y * v.y, this.z * v.z);
+  };
 
   this.sum = function(v) {
     if (!(v instanceof Vector)) alert('Trying to get vector + not a vector');
