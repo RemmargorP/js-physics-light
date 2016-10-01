@@ -21,7 +21,6 @@ function Graphics(element) {
   };
 
   this.scaled = function(v) {
-    console.log('kek', this.scale, v, this.scale.mulV(v));
     return this.scale.mulV(v);
   };
 

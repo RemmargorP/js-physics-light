@@ -5,8 +5,23 @@
 }
 
 .data {
-  float: right;
+  float:right;
   width: 35%;
+}
+
+.info {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.model {
+  margin-top: 10px;
+}
+
+.box {
+  width: 10px !important;
+  height: 10px !important;
+  display: inline-block;
 }
 
 .verticalDivider {

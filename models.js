@@ -1,3 +1,12 @@
+function getRandomColor() {
+  var letters = '0123456789AB';
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.floor(Math.random() * 12)];
+  }
+  return color;
+}
+
 function Vector(x=0, y=0, z=0) {
   this.x = x;
   this.y = y;
@@ -46,6 +55,9 @@ function Particle(position = new Vector(0, 0, 0), velocity = new Vector(0, 0, 0)
   this.position = position;
   this.velocity = velocity;
   this.acceleration = acceleration;
+  this.appearance = {
+    color: getRandomColor()
+  };
 
   this.collide = function() {
     if (this.position.y <= 0) {

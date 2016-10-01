@@ -4,9 +4,9 @@ function Model() {
   };
 
   r0 = new Vector(0, 10, 0);
-  v0 = new Vector(15, 6, 0);
+  v0 = new Vector(15, 60, 0);
 
-  this.particles = [new Particle(r0, v0, this.constants.g)]
+  this.particles = [new Particle(r0, v0, this.constants.g), new Particle(r0, new Vector(15, -20), this.constants.g.mul(0.5))]
   this.update = function(delta_t) {
     this.particles.forEach(function(item, index, arr) {
       item.update(delta_t);
@@ -19,12 +19,12 @@ function Model() {
 
 function Simulator() {
   this.graphics = new Graphics(document.getElementById("simulation"));
-  this.graphics.setProps(new Vector(10, 50, 0), new Vector(2, 20, 0));
+  this.graphics.setProps(new Vector(10, 10, 0), new Vector(2, 2, 0));
   this.model = new Model();
 
-  this.UPS = 2e4;
+  this.UPS = 1e4;
   this.deltaT = 1e-4;
-  this.FPS = 45;
+  this.FPS = 90;
   this.running = false;
 
   this.lastUpdate = Date.now();
@@ -46,11 +46,10 @@ function Simulator() {
 
     this.model.particles.forEach(function(item, index, arr) {
       var pos = graphics.getPosition(item.position);
-      console.log(pos);
       ctx.beginPath();
       var sizes = graphics.scaled(new Vector(2, 2, 0));
       ctx.arc(pos.x - sizes.x / 2, pos.y - sizes.y / 2, sizes.y, 0, Math.PI * 2, false);
-      ctx.fillStyle = "green";
+      ctx.fillStyle = item.appearance.color;
       ctx.fill();
       ctx.closePath();
     });
@@ -62,7 +61,26 @@ function Simulator() {
   }
 
   this.printData = function() {
-    
+    // particles
+    var tmp = document.getElementsByClassName("data")[0];
+    if (tmp.getElementsByClassName("particles").length == 0) {
+      var elem = document.createElement('div');
+      elem.innerHTML = '<div>Particles:</div><div class="particles info"><div></div></div>';
+      elem.className = 'model particles';
+      tmp.appendChild(elem);
+    }
+
+    this.model.particles.forEach(function(item, index, arr) {
+      var list = document.getElementsByClassName("particles info")[0].childNodes[0];
+      while (index >= list.childNodes.length) {
+        list.appendChild(document.createElement('div'));
+      }
+      var elem = list.childNodes[index];
+      elem.innerHTML = '<div class="box" style="background-color: ' + item.appearance.color + ';"></div>' +
+                        '<div> position: (' + item.position.x.toFixed(3) + '; ' + item.position.y.toFixed(5) + ')<br>'+
+                        'velocity: (' + item.velocity.x.toFixed(3) + '; ' + item.velocity.y.toFixed(5) + ')<br>' +
+                        'acceleration: (' + item.acceleration.x.toFixed(3) + '; ' + item.acceleration.y.toFixed(5) + ')<br></div>';
+    });
   }
 
   this.simulate = function() {
